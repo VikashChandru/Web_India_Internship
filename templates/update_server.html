@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Update Server</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container mt-4">
+    <h2>Update Server</h2>
+    <form id="updateForm" class="mt-3">
+      <div class="mb-3">
+        <label for="sid" class="form-label">Server ID</label>
+        <input type="text" id="sid" class="form-control" readonly />
+      </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Server Name</label>
+        <input type="text" id="name" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <input type="text" id="type" class="form-control" value="Physical" readonly />
+      </div>
+      <div class="mb-3">
+        <label for="cpu" class="form-label">CPU Usage</label>
+        <input type="text" id="cpu" class="form-control" placeholder="e.g. 60%" required />
+      </div>
+      <div class="mb-3">
+        <label for="ram" class="form-label">RAM Usage</label>
+        <input type="text" id="ram" class="form-control" placeholder="e.g. 70%" required />
+      </div>
+      <div class="mb-3">
+        <label for="disk" class="form-label">Disk Space</label>
+        <input type="text" id="disk" class="form-control" placeholder="e.g. 100gb/500gb" />
+      </div>
+      <div class="mb-3">
+        <label for="assigned" class="form-label">Assigned To</label>
+        <input type="text" id="assigned" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="uptime" class="form-label">Uptime</label>
+        <input type="text" id="uptime" class="form-control" placeholder="e.g. 12h" />
+      </div>
+      <button class="btn btn-warning me-2" onclick="goToUpdateServer()">Update Server</button>
+      <button type="button" class="btn btn-secondary ms-2" onclick="goBack()">Cancel</button>
+    </form>
+  </div>
+
+  <script>
+    // Utility to get URL param
+    function getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+
+    // Pre-fill form based on S_ID (for demo, we load dummy data or get from localStorage)
+    const sid = getQueryParam('sid');
+
+    if (!sid) {
+      alert("No Server ID provided.");
+      window.location.href = 'physical_server_management.html'; // your main page
+    } else {
+      document.getElementById('sid').value = sid;
+
+      // For demo: try to get server data from localStorage or dummy object
+      // Here, we simulate fetching server data
+      // In a real app, fetch this from API or pass data another way
+
+      // Dummy data example (replace this with your real source)
+      const servers = JSON.parse(localStorage.getItem('servers') || '[]');
+
+      const serverData = servers.find(s => s.sid === sid);
+
+      if (serverData) {
+        document.getElementById('name').value = serverData.name;
+        document.getElementById('type').value = serverData.type;
+        document.getElementById('cpu').value = serverData.cpu;
+        document.getElementById('ram').value = serverData.ram;
+        document.getElementById('disk').value = serverData.disk;
+        document.getElementById('assigned').value = serverData.assigned;
+        document.getElementById('uptime').value = serverData.uptime;
+      } else {
+        // fallback if no localStorage data found
+        alert('Server data not found. You may want to implement a data fetch.');
+      }
+    }
+
+    document.getElementById('updateForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Gather updated data
+      const updatedServer = {
+        sid: document.getElementById('sid').value,
+        name: document.getElementById('name').value,
+        type: document.getElementById('type').value,
+        cpu: document.getElementById('cpu').value,
+        ram: document.getElementById('ram').value,
+        disk: document.getElementById('disk').value,
+        assigned: document.getElementById('assigned').value,
+        uptime: document.getElementById('uptime').value,
+      };
+
+      // For demo: save back to localStorage (replace with real update logic)
+      let servers = JSON.parse(localStorage.getItem('servers') || '[]');
+      const index = servers.findIndex(s => s.sid === updatedServer.sid);
+
+      if (index > -1) {
+        servers[index] = updatedServer;
+      } else {
+        alert('Server ID not found in storage.');
+        return;
+      }
+
+      localStorage.setItem('servers', JSON.stringify(servers));
+      alert('Server updated successfully.');
+
+      // Redirect back to main page (refresh or real reload needed to reflect changes)
+      window.location.href = 'physical_server_management.html';
+    });
+
+    function goBack() {
+      window.location.href = 'physical_server_management.html';
+    }
+  </script>
+</body>
+</html>
