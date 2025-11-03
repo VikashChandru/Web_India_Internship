@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add New Server</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .full-page-form {
+      max-width: 600px;
+      margin: 5% auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .form-floating label {
+      padding-left: 0.75rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
+
+    @media (min-width: 576px) {
+      .btn-group {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="full-page-form">
+    <h3 class="mb-4 text-center">Add New Physical Server</h3>
+
+    <div class="form-floating mb-3">
+      <input type="text" id="sid" class="form-control" placeholder="Server ID" readonly />
+      <label for="sid">Server ID</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" id="name" class="form-control" placeholder="Server Name" />
+      <label for="name">Server Name</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" id="type" class="form-control" placeholder="Type" value="Physical" readonly />
+      <label for="type">Type</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" id="cpu" class="form-control" placeholder="CPU Usage" />
+      <label for="cpu">CPU Usage (e.g. 60%)</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" id="ram" class="form-control" placeholder="RAM Usage" />
+      <label for="ram">RAM Usage (e.g. 70%)</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" id="disk" class="form-control" placeholder="Disk Space" />
+      <label for="disk">Disk Space (e.g. 100gb/500gb)</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" id="assigned" class="form-control" placeholder="Assigned To" />
+      <label for="assigned">Assigned To</label>
+    </div>
+
+    <div class="form-floating mb-4">
+      <input type="text" id="uptime" class="form-control" placeholder="Uptime" />
+      <label for="uptime">Uptime (e.g. 12h)</label>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-success w-100" onclick="submitServer()">Submit</button>
+      <button class="btn btn-secondary w-100" onclick="window.location.href='physical_server_management.html'">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Auto-generate next server ID (simulate)
+  document.addEventListener("DOMContentLoaded", () => {
+    const sidInput = document.getElementById("sid");
+    // Simulate getting max ID from somewhere (default to 3)
+    const simulatedMaxId = 2;
+    sidInput.value = simulatedMaxId + 1;
+  });
+
+  function submitServer() {
+    const sid = document.getElementById("sid").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const cpu = document.getElementById("cpu").value.trim();
+    const ram = document.getElementById("ram").value.trim();
+    const disk = document.getElementById("disk").value.trim();
+    const assigned = document.getElementById("assigned").value.trim();
+    const uptime = document.getElementById("uptime").value.trim();
+    const type = document.getElementById("type").value;
+
+    if (!sid || !name || !cpu || !ram || !uptime) {
+      alert("Please fill all required fields.");
+      return;
+    }
+
+    if (!/^\d+(h|d)?$/i.test(uptime)) {
+      alert("Uptime must be in a valid format like 12h or 3d.");
+      return;
+    }
+
+    // Optional: Store in localStorage, or send to server
+    alert("Server added successfully!");
+
+    // Redirect back
+    window.location.href = "physical_server_management.html";
+  }
+</script>
+
+</body>
+</html>

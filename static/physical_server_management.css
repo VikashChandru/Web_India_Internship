@@ -1,0 +1,163 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+.table {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.button-group,
+.footer-buttons {
+  margin-bottom: 20px;
+}
+
+/* Base styles for all buttons in groups */
+.button-group button,
+.footer-buttons button {
+  margin-right: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  color: #fff;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+}
+
+/* Button colors matching Bootstrap's */
+.button-group button:nth-child(1) { /* Add Server - success */
+  background-color: #198754;
+}
+.button-group button:nth-child(1):hover {
+  background-color: #157347;
+}
+
+.button-group button:nth-child(2) { /* Update Server - warning */
+  background-color: #ffc107;
+  color: #212529;
+}
+.button-group button:nth-child(2):hover {
+  background-color: #e0a800;
+  color: #212529;
+}
+
+.button-group button:nth-child(3) { /* Delete Server - danger */
+  background-color: #dc3545;
+}
+.button-group button:nth-child(3):hover {
+  background-color: #b02a37;
+}
+
+.button-group button:nth-child(4) { /* Assign Server - secondary */
+  background-color: #6c757d;
+}
+.button-group button:nth-child(4):hover {
+  background-color: #565e64;
+}
+
+/* Footer buttons with info, secondary and danger */
+.footer-buttons button:nth-child(1) { /* Alerts - info */
+  background-color: #0dcaf0;
+  color: #000;
+}
+.footer-buttons button:nth-child(1):hover {
+  background-color: #31d2f2;
+  color: #000;
+}
+
+.footer-buttons button:nth-child(2) { /* Schedule Maintenance - primary */
+  background-color: #0d6efd;
+}
+.footer-buttons button:nth-child(2):hover {
+  background-color: #0b5ed7;
+}
+
+.footer-buttons button:nth-child(3) { /* Manage Users - secondary */
+  background-color: #6c757d;
+}
+.footer-buttons button:nth-child(3):hover {
+  background-color: #565e64;
+}
+
+/* Form Popup styles */
+.form-popup {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 500px;
+  width: 90%;
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px rgba(0,0,0,0.25);
+  z-index: 1050;
+}
+
+.form-popup input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-popup button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  font-weight: bold;
+  color: white;
+  background-color: #198754; /* submit button green */
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+}
+
+.form-popup button:hover {
+  background-color: #157347;
+}
+
+.form-popup button.cancel {
+  background-color: #dc3545; /* cancel button red */
+}
+
+.form-popup button.cancel:hover {
+  background-color: #b02a37;
+}
+
+.overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.sidebar .nav-link.active {
+  background-color: #e9ecef;
+  font-weight: bold;
+  border-left: 4px solid #0d6efd;
+}
