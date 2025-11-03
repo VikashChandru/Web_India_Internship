@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forgot Password</title>
+  <link rel="stylesheet" href="/static/style1.css">
+</head>
+<body>
+  <div class="container">
+    <form id="forgotPasswordForm" method="POST" action="/forgot">
+      <center>
+        <h2>Forgot Password</h2>
+      </center>
+
+      {% if message %}
+        <div id="serverMessage" style="color: #333; background-color: #eef; padding: 10px; margin: 10px 0; border: 1px solid #ccc; text-align: center;">
+          {{ message }}
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required />
+        <div id="emailError" class="error-message" style="color: red; display: none;"></div>
+      </div>
+
+      <div id="securityQuestionGroup" style="display: none;">
+        <div class="form-group">
+          <label for="securityQuestion">Security Question</label>
+          <select id="securityQuestion">
+            <option value="">-- Select --</option>
+            <option value="pet">What is your pet's name?</option>
+            <option value="school">What is your first school's name?</option>
+          </select>
+          <div id="securityQuestionError" class="error-message"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="securityAnswer">Security Answer</label>
+          <input type="text" id="securityAnswer" />
+          <div id="securityAnswerError" class="error-message"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div id="formError" class="error-message" style="text-align: center;"></div>
+        <button type="submit" id="submitButton">Reset Password</button>
+      </div>
+
+      <div class="form-group" style="text-align: center; margin-top: 10px;">
+        <a href="/" id="backToLogin" style="text-decoration: none; color: #007bff;">← Back to Login</a>
+      </div>
+
+      <div id="successMessage" style="text-align: center; display: none;">Password reset successful! Check your email.</div>
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/forgot-password.js') }}"></script>
+</body>
+</html>
